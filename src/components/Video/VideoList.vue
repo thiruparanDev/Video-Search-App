@@ -1,6 +1,6 @@
 <template>
   <div class="videoList">
-      <VideoListItem v-for="video in videos" :video="video" :key="video.etag"/>
+      <VideoListItem v-for="video in videos" :video="video" :key="video.etag" @selectVideo="selectVideo"/>
       <!-- {{videos.length}} -->
   </div>
 </template>
@@ -24,8 +24,13 @@ export default defineComponent({
   computed: {
 
   },
-  setup () {
+  setup (_,{emit}) {
+    const selectVideo = (video:any)=>{
+          //  console.log(video);
+      emit('selectVideo',video);
+    };
     return {
+      selectVideo
     };
   }
 });
@@ -36,7 +41,10 @@ export default defineComponent({
 .videoList{
   display:flex;
   flex-direction:column;
-  align-items:center;
+  // align-items:center;
+  // align-items:left;
+  text-align:left;
+  left:400;
     // background-color:blue;
 }
 </style>

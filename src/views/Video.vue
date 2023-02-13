@@ -1,9 +1,9 @@
 <template>
   <div class="video">
     <h1>This is Video page</h1>
-    <SearchBar @termChange="onTermChange"/>
-    <VideoList :videos="videos"/>
-    <!-- <button @click="getVideo">click</button> -->
+    <SearchBar @termChange="onTermChange" />
+    <SelectedVideo :video="selectVideoValue"/>
+    <VideoList :videos="videos" @selectVideo="selectVideo"/>
     <div></div>
   </div>
 </template>
@@ -11,24 +11,23 @@
 import { defineComponent,ref } from 'vue';
 import SearchBar from '@/components/Video/SearchBar.vue';
 import VideoList from '@/components/Video/VideoList.vue';
-// import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
-// import AdditionalPage from '../components/AdditionalPage'
-// import AdditionalPage from '@/components/AdditionalPage.vue'
+import SelectedVideo from '@/components/Video/SelectedVideo.vue';
+
 import axios from 'axios';
-const API_KEY = 'AIzaSyBIyTG_IwC38ZvwBPMde-lfGnoBP2J_lrg';
+const API_KEY = 'AIzaSyBBP4qzaQ787OqjtylnC2JaLwmC-TkJ6aU';
 export default defineComponent({
   // name: 'Home',
 
   components: {
-    // AdditionalPage
     SearchBar,
-    VideoList
+    VideoList,
+    SelectedVideo
   },
   setup () {
     const videos = ref([]);
+    const selectVideoValue = ref();
       const onTermChange=(term:any)=> {
-        console.log(videos);
-    // const getVideo = async () => {
+
       axios.get('https://www.googleapis.com/youtube/v3/search', {
         params: {
           key: API_KEY,
@@ -37,13 +36,18 @@ export default defineComponent({
           q: term
         }
       }).then(response => videos.value=response.data.items);
-      // };
-        // console.log(term);
     };
+      const selectVideo = (video:any) => {
+        console.log(video);
+
+        selectVideoValue.value=video;
+      };
     return {
       // getVideo,
       onTermChange,
-      videos
+      videos,
+      selectVideo,
+      selectVideoValue
     };
   }
 });
@@ -53,5 +57,9 @@ export default defineComponent({
 <style lang="scss" >
 .video {
   font-size: 11px;
+    display:flex;
+  flex-direction:column;
+  align-items:left;
+  // align-items:left
 }
 </style>

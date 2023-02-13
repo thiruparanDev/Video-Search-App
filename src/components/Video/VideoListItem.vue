@@ -1,6 +1,6 @@
 <template>
   <div class="videoListItem">
-    <li @click="selectVideo">
+    <li @click="selectVideo" >
       <img :src="video.snippet.thumbnails.high.url" />
       {{ video.snippet.title }}
     </li>
@@ -19,14 +19,17 @@ export default defineComponent({
     // AdditionalPage
   },
   computed: {},
-  setup() {
-    const selectVideo = (event: any) => {
-      console.log((event.target.value.snippet as HTMLInputElement).title);
+  setup(props,{emit}) {
+    const selectVideo = () => {
+
+      emit('selectVideo',props.video);
+      // console.log(props.video.snippet.title);
+      // console.log((event.target.value.snippet as HTMLInputElement).title);
     };
     return {
-      selectVideo,
+      selectVideo
     };
-  },
+  }
 });
 </script>
 

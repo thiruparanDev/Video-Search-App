@@ -1,17 +1,16 @@
 <template>
-  <div class="selectedVideo">
+  <div class="selectedVideo" v-if="video">
+    <div >{{video?.snippet?.title}}</div>
+<iframe width="560" height="315" :src="videoUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
-// import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
-// import AdditionalPage from '../components/AdditionalPage'
-// import AdditionalPage from '@/components/AdditionalPage.vue'
+
 export default defineComponent({
   // name: 'Home',
-  props: {
-
-  },
+  props: ['video'],
+  
   methods: {
 
   },
@@ -19,10 +18,18 @@ export default defineComponent({
     // AdditionalPage
   },
   computed: {
-
+    videoUrl(props:any){
+        return `https://www.youtube.com/embed/${props?.video?.id?.videoId}`;
+    }
+ 
   },
   setup () {
+
+      //  let videoUrl=`https://www.youtube.com/embed/sW0iNSrmcDQ`;
+
+    // console.log(props?.video);
     return {
+      // videoUrl
     };
   }
 });

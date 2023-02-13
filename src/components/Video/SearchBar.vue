@@ -10,7 +10,7 @@ import { defineComponent } from "vue";
 // import AdditionalPage from '@/components/AdditionalPage.vue'
 const termChange='termChange';
 export default defineComponent({
-  emits:[termChange],
+  // emits:[termChange],
   // name: 'Home',
   components: {
     // AdditionalPage
