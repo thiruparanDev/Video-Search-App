@@ -1,0 +1,17 @@
+.ant-table {
+    tbody tr:nth-child(odd) {
+      background-color: gray;
+    }
+    thead tr th{
+        background: white !important;
+    }
+    .ant-table-tbody > tr > td {
+        border-bottom: none;
+        min-width: 100px;
+    }
+    .ant-table-thead > tr > th {
+        // border-bottom: none;
+        border: #e5e5e5 1px solid;
+        font-weight: 600;
+    }
+  }
