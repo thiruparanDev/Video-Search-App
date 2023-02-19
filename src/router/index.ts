@@ -24,6 +24,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/table',
     name: 'Table',
     component: () => import(/* webpackChunkName: "about" */ '../views/Table.vue')
+  },
+  {
+    path: '/timelineview',
+    name: 'TimelineView',
+    component: () => import(/* webpackChunkName: "about" */ '../views/TimelineView.vue')
   }
 ];
 

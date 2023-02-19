@@ -26,15 +26,22 @@
             </template>
         </a-table-column>
     </a-table> -->
-    <a-table :dataSource="dataSource" :columns="columns" ></a-table>
-    <a-button type="primary">Primary Button</a-button>
-    hi
+    
+    <a-table :dataSource="dataSource" :columns="columnsRef" ><draggable>hi</draggable></a-table>
+    <a-button type="primary" @click="changeName">Primary Button</a-button>
+    {{name}}
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
+import draggable from "vuedraggable";
+import { ref } from "vue";
 
 export default defineComponent({
+  components:{
+    draggable
+  },
     setup() {
+      const name = ref ("thiru");
         const dataSource= [
           {
             key: '1',
@@ -50,26 +57,42 @@ export default defineComponent({
           }
         ];
 
-        const columns = [
+        const columnsRef = ref([
           {
             title: 'Name',
             dataIndex: 'name',
-            key: 'name'
+            key: 'name',
+            hidden:false
           },
           {
             title: 'Age',
             dataIndex: 'age',
-            key: 'age'
+            key: 'age',
+            hidden:false
           },
           {
             title: 'Address',
             dataIndex: 'address',
-            key: 'address'
+            key: 'address',
+            hidden:false
           }
-        ];
+        ].filter(column => !column.hidden));
+        const changeName = ()=>{
+          name.value="bala";
+          columnsRef.value[2].title="ab";
+          columnsRef.value[2].hidden=true;
+
+        };
+        // const getColumn = ()=> {
+        //   return columnsRef.value.filter(column => !column.hidden);
+        // };
         return {
             dataSource,
-            columns
+            columnsRef,
+            name,
+            changeName
+            // ,
+            // getColumn
         };
     }
 });
