@@ -85,7 +85,7 @@ export default defineComponent({
     // background-color: orange;
 
     .post {
-        background-color: white;
+        // background-color: white;S
         }
     a{
         // background-color: blue;
