@@ -6,11 +6,9 @@
         </span>
     </nav>
     <div class="container">
-    <div class="post">
-    <a v-for="post in posts" :key="post.title" >
-        <a>{{post.title}}</a>
-        <div>{{post.created.format('Do MM')}}</div>
-    </a>
+        <div class="post">
+        <TimelinePost :posts="posts"/>
+
 </div>
 </div>
 </template>
@@ -18,9 +16,11 @@
 import { defineComponent, ref, computed } from "vue";
 import moment from "moment";
 import {today, thisWeek, thisMonth} from '@/mocks';
+import TimelinePost from "@/components/Timeline/TimelinePost.vue";
 export default defineComponent({
     name: 'Timeline',
     components: {
+        TimelinePost
     },
     // props:{
     //     today,
@@ -87,19 +87,7 @@ export default defineComponent({
     .post {
         // background-color: white;S
         }
-    a{
-        // background-color: blue;
-        display:flex;
-        justify-content: left;
-        position: relative;
-        // left:800px
-        // left:200px
-        // left:'50%'
-        &:hover{
-            cursor: pointer;
-}   
-
-    }
+    
 };
 
 </style>
