@@ -5,11 +5,13 @@
     <!-- <div>{{newObjRef}}</div> -->
     <div>{{newObjRef1}}</div>
     <button @click="onClickHandler">click</button>
+    <button @click="onClickHandler2">click2</button>
+    {{add}}
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent,reactive, watch, computed } from 'vue';
+import { defineComponent,reactive, watch, computed,ref } from 'vue';
 
 export default defineComponent({
   setup(){
@@ -28,33 +30,44 @@ export default defineComponent({
         colour:"black"
       }
     };
-    const newObjRef = reactive({
-      person: {
-        name: "Bala",
-        Age: 72
-      },
-      Animal: {
-        name:"dog",
-        colour:"orange"
-      }
-    });
-    const newObjRef1 = reactive(newObj);
+    // const newObjRef = reactive({
+    //   person: {
+    //     name: "Bala",
+    //     Age: 72
+    //   },
+    //   Animal: {
+    //     name:"dog",
+    //     colour:"orange"
+    //   }
+    // });
+    let a={b:1};
+    const newObjRef1 = ref(newObj);
     watch(newObj,()=>{console.log("newObj changed");});
-    watch(newObjRef,()=>{console.log("newObjRef changed");});
+    watch(newObjRef1,()=>{console.log("newObjRef changed");});
+    const add=ref([1,a]);
     // const newOb = computed(()=>{
     //   return newObj;
     // });
 
     const onClickHandler=()=>{
-      newObjRef1.dog={name:'d'};
+      newObjRef1.value.person={name:"bala", Age:72};
+      // newObjRef1.value.person.Age=73;
+      // newObjRef1.value.dog={name:'d'};
       // newObjRef.Animal.colour = "orange";
     };
-
+    const onClickHandler2=()=>{
+      // newObjRef1.value.person={name:"thiru", Age:72};
+      newObjRef1.value.person.Age=73;
+      // a.value=3;
+      a={b:2};
+    };
     return {
       newObj,
-      newObjRef,
+      // newObjRef,
       onClickHandler,
-      newObjRef1
+      newObjRef1,
+      onClickHandler2,
+      add
     };
   }
 });
