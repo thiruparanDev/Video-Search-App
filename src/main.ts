@@ -4,6 +4,7 @@ import router from './router';
 import store from './store';
 import antd, { DatePicker } from 'ant-design-vue';
 import '@/styles.scss';
+import '@progress/kendo-theme-default/dist/all.css';
 // import '@surely-vue/table/dist/index.less';
 // import STable from '@surely-vue/table';
 

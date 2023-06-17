@@ -3,13 +3,21 @@
         <a>{{post.title}}</a>
         <a>{{post.created.format('Do MM')}}</a>
     </a>
+    <a-button>hi</a-button>
+    <ColorPicker
+        :default-value="'rgba(237, 126, 50, 1)'"
+      />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, computed } from "vue";
+import { ColorPicker } from '@progress/kendo-vue-inputs';
 export default defineComponent ({
     name:'TimelinePost',
-    props:['posts']
+    props:['posts'],
+    components: {
+        ColorPicker
+    }
     // ,
     // setup (){
 

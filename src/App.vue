@@ -5,12 +5,23 @@
     <router-link to="/video">Video</router-link> |
     <router-link to="/table">Table</router-link> |
     <router-link to="/timelineView">Timeline</router-link>
-
   </div>
   <router-view/>
+  
 </template>
+<script lang="ts">
+import { defineComponent, ref, computed } from "vue";
+export default defineComponent ({
+    props:['posts'],
+    components: {
+    }
+    // ,
+    // setup (){
 
-<style>
+    // }
+});
+</script>
+<style >
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
