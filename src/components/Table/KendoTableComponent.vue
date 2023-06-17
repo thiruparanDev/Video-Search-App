@@ -1,11 +1,18 @@
 <template>
     Kendo Table
-    <Grid :data-items="products" :columns="columns"></Grid>
+    <!-- <DropDownList
+    :data-items="categories"
+    :data-item-key="'CategoryID'"
+    :text-field="'CategoryName'"
+    >
+</DropDownList> -->
+    <Grid :pageable="pageable" :sortable="sortable" :data-items="products" :columns="columns" class="TableGrid"></Grid>
 <!-- <TableComponent/> --></template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent,ref } from "vue";
 // import TableComponent from '@/components/Table/TableComponent.vue';
 import { Grid } from '@progress/kendo-vue-grid';
+// import { DropDownList } from '@progress/kendo-vue-dropdowns';
 // import products from '@/components/appdata/products.json';
 // import categories from '../appdata/categories.json';
 
@@ -13,9 +20,28 @@ export default defineComponent({
     // props:{products},
     components: {
         Grid
+        // ,
+        // DropDownList
         // 'grid':Grid
     },
     setup() {
+        const skip = ref(0);
+    const take = ref(10);
+    const sort = ref([
+      { field: "ProductName", dir: "asc" }
+    ]);
+        const pageable = ref(true);
+    const sortable = ref(true);
+    const categories = [
+    {"CategoryID": 1, "CategoryName": "Beverages"},
+    {"CategoryID": 2, "CategoryName": "Condiments"},
+    {"CategoryID": 3, "CategoryName": "Confections"},
+    {"CategoryID": 4, "CategoryName": "Dairy Products"},
+    {"CategoryID": 5, "CategoryName": "Grains/Cereals"},
+    {"CategoryID": 6, "CategoryName": "Meat/Poultry"},
+    {"CategoryID": 7, "CategoryName": "Produce"},
+    {"CategoryID": 8, "CategoryName": "Seafood"}
+  ];
         const products = [
             { "ProductID": 1, "ProductName": "Tea", "CategoryID": 1, "QuantityPerUnit": "10 boxes x 20 bags", "UnitPrice": 18.0, "UnitsInStock": 39, "Discontinued": false },
             { "ProductID": 7, "ProductName": "Dried Pears", "CategoryID": 7, "QuantityPerUnit": "12 - 1 lb pkgs.", "UnitPrice": 30.0, "UnitsInStock": 15, "Discontinued": false },
@@ -42,9 +68,28 @@ export default defineComponent({
         ];
         return {
             columns,
-            products
+            products,
+            categories,
+            pageable, sortable,
+            skip, take, sort
         };
     }
 });
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+  .TableGrid {
+    // background-color: blue;
+    height: calc(100vh - 160px) !important;
+    overflow-y: auto;
+    &.k-grid th {
+      font-size: 13px;
+      font-weight: bold;
+      background-color: #fff;
+    }
+    &.k-grid td {
+      font-size: 13px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }</style>
